@@ -1,0 +1,81 @@
+﻿
+body {
+    font-family: Goudy Old Style, sans-serif;
+    width: 800px;  
+    margin:auto;
+   
+}
+
+
+
+
+
+
+
+
+.btn {
+    cursor:cell;
+    
+}
+
+
+
+
+
+
+.listSty {
+    margin:20px auto ;
+    width: 100%;
+}
+
+
+
+
+
+/* GridView 標題樣式 */
+.listSty th {
+        background-color: #f2f2f2;
+        font-weight: bold;
+        text-align: left;
+        padding: 10px;
+
+    }
+
+
+/* GridView 每行的奇數行樣式 */
+.listSty tr:nth-child(odd) {
+        background-color: #f9f9f9;
+    }
+
+
+/* GridView 單元格樣式 */
+    .listSty th, .listSty td {
+        border: 1px solid #ddd; 
+        padding: 8px; 
+    }
+
+
+
+
+
+.replySty {
+    background-color: #F2F2F2;
+    width: 100%;
+    padding-left: 20px;
+    padding-top: 20px;
+    margin-bottom: 20px;
+    margin: 20px auto;
+    /*border:1px solid black;*/
+}
+
+.user {
+    color: #595959;
+    text-shadow: 0.1em 0.1em 0.05em #CCCCCC;
+    
+}
+
+
+.replyDate{
+    font-size: 12px;
+
+}

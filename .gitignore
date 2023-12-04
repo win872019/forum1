@@ -1,0 +1,10 @@
+.vs/                       
+packages/                  
+bin/       
+Content/   
+obj/       
+Properties/
+Scripts/
+Upload/
+*.user                     
+*.config              
