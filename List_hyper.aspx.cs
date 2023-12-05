@@ -15,9 +15,9 @@ namespace Forum_fianl
         {
 
             
-            string sql = "select * from List";         //TC：建議這邊的showDB，都放在if(Session["myName"] != null){ }裡面
-            DbTool db = new DbTool();              //TC：確保是有登入成功後，再進行showDB
-            db.showDB_GridView(sql, GridView1); //TC：將此方法寫在DbTool.CS檔案是一個很好的做法
+            string sql = "select * from List";
+            DbTool db = new DbTool();
+            db.showDB_GridView(sql, GridView1);
 
 
             if (!IsPostBack)
@@ -35,7 +35,7 @@ namespace Forum_fianl
                     WelcomeText.Text = "哈囉! 訪客 ";
                     LoginBtn.Visible = true;
                     LogoutBtn.Visible = false;
-                    CreateBtn.Visible = false;              //TC：用visible遮蓋也是OK，但建議還是導回Login Page
+                    CreateBtn.Visible = false;
                 }
 
             }
@@ -67,7 +67,7 @@ namespace Forum_fianl
             Session["userId"] = null;
             WelcomeText.Text = "哈囉! 訪客 ";
             LoginBtn.Visible = true;
-            LogoutBtn.Visible = false;     //TC：建議導向LoginPage
+            LogoutBtn.Visible = false;
         }
 
         protected void CreateBtn_Click(object sender, EventArgs e)

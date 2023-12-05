@@ -25,16 +25,13 @@ namespace Forum_fianl
                 userName = Session["myName"].ToString();
                 userId = Session["userId"].ToString();
             }
-            //else 
-            //{
-            //    建議重新導向到Login Page
-            //}
+
         }
 
         protected void submitBtn_Click(object sender, EventArgs e)
         {
-            //TC：連線資料庫，可以效仿 List_hyper 頁面，使用db.ConnectDb()等作法，減少下方程式碼撰寫
-            #region  "連線資料庫"   
+
+            #region  "連線資料庫"
 
             //建立SQL連接的物件 方法1. V
 
@@ -67,7 +64,7 @@ namespace Forum_fianl
             string s4 = $"INSERT INTO List(Title,[User], PostDate,  PostId, UserId) OUTPUT INSERTED.Id INTO @listId VALUES(@title,@userName,  GETDATE(), @postIdValue, @userId);";
 
             string s5 = "DECLARE @listIdValue INT; SELECT @listIdValue = Id FROM @listId; UPDATE Post SET ListId = @listIdValue WHERE Id=@postIdValue";
-            //TC：我目前是沒有用DECLARE宣告SQL變數，是否有此必要，可以在衡量，畢竟，相關的變數都是透過下方的paramert設定了
+
 
 
             sqlCommand.Parameters.AddWithValue("@userName", userName);
