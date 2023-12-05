@@ -11,7 +11,7 @@ namespace Forum_fianl
 {
     public partial class Login_hyper : System.Web.UI.Page
     {
-        DbTool db = new DbTool();
+        DbTool db = new DbTool();  //TC：好像都沒有用到db物件的方法，例如db.ConnectDb()等等，下面都是你自己寫的，熟悉寫法後，建議改成以db物件所內建的方法進行撰寫
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -20,7 +20,7 @@ namespace Forum_fianl
                 {
                     string username = Session["myName"].ToString();
 
-                    StatusLabel.Text = $"Hi,{username}! 您已登入";
+                    StatusLabel.Text = $"Hi,{username}! 您已登入"; 
 
                 }
 
@@ -38,7 +38,7 @@ namespace Forum_fianl
         protected void LoginButton_Click(object sender, EventArgs e)
         {
 
-            string username = UsernameTextBox.Text;
+            string username = UsernameTextBox.Text;     // TC：建議可以加入一些驗證控制項，這樣下面可以免去null or empty的判定
             string password = PasswordTextBox.Text;
             string mail = "";
             string pw = "";
@@ -76,10 +76,10 @@ namespace Forum_fianl
             if (username != null && password != null && username != "" && password != "")
             {
 
-                sql = $"SELECT * FROM [User] where Email=@uEmail";
+                sql = $"SELECT * FROM [User] where Email=@uEmail";      //TC：是否要再加入password的確認，僅確認帳號，帳號的重複性可能會很高
                 sqlCommand.Parameters.AddWithValue("@uEmail", username);
             }
-            else
+            else                                                                                            //TC：如果帳號和密碼欄位是空的，會重新導向，但此時string sql是" "，下面的sqlCommand還是會運行，有機會出現錯誤，建議把SQL的執行寫在特定的{ }內
             {
 
                 Response.Redirect("Login_hyper.aspx");
@@ -118,9 +118,9 @@ namespace Forum_fianl
 
 
             if (mail != null && pw != null && userId != null)
-            {
-                if (username == mail && password == pw)
-                {
+            {                                                                               //TC：你的做法是先用帳號進行資料庫比對，在抓出資料庫內的密碼，進行比較
+                if (username == mail && password == pw)      //TC：這邊進行帳號和密碼的比較
+                {                                                                           //TC：我會建議在79~81行就直接進行帳號和密碼的比較，這樣這附近的code都可以省略
                     Session["myName"] = myName;
                     Session["userId"] = userId;
 
@@ -134,7 +134,7 @@ namespace Forum_fianl
 
 
                 }
-                else if (mail == null || mail == "")
+                else if (mail == null || mail == "")              //TC：在上一層if已經把mail=null篩選掉了
                 {
                     StatusLabel.Text = "此帳號未註冊";
                 }

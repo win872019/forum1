@@ -32,7 +32,7 @@ namespace Forum_fianl
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            post_qString = Request.QueryString["ID"];
+            post_qString = Request.QueryString["ID"];                                               //TC：這邊可能會出錯，如果網頁沒有QueryString，會出現錯誤
             dbTool.showDB_DetailsView(sql, "@Id", post_qString, DetailsView1);
 
 
@@ -42,6 +42,10 @@ namespace Forum_fianl
                 userName = Session["myName"].ToString();
                 userId = Session["userId"].ToString();
             }
+            //else 
+            //{
+            //  少了重新導向的部分
+            //}
 
 
 
@@ -50,7 +54,7 @@ namespace Forum_fianl
             string userId_row = DetailsView1.Rows[6].Cells[1].Text;
 
             // 已登入
-            if (Session["myName"] != null && Session["userId"] != null)
+            if (Session["myName"] != null && Session["userId"] != null)     //TC：這個部分和 40 行 有重複，建議放在一起
             {
                 // 使用者進自己的Post
                 if (Session["myName"].ToString() == user_row && Session["userId"].ToString() == userId_row)
@@ -84,7 +88,7 @@ namespace Forum_fianl
             string replySql = $"select * from Reply where PostId={post_qString}";
 
 
-            dbTool.showDB_ListView(replySql, ListView1);
+            dbTool.showDB_ListView(replySql, ListView1);    //TC：使用ListView來生成留言，是一個很好的做法
 
 
 
@@ -102,7 +106,7 @@ namespace Forum_fianl
 
         protected void replyBtn_Click(object sender, EventArgs e)
         {
-            if(replyMes.Text!=null && replyMes.Text !=" ") 
+            if(replyMes.Text!=null && replyMes.Text !=" ")    //TC：透過驗證控制項，可以不用於這邊判定
             {
                 string sql_reply = $"Insert into Reply([User],Content,UserId,PostId) Values(@userName,@replyText,@userId,@post_qString)";
 
